@@ -13,7 +13,7 @@ class PluginVersionResource extends JsonResource
             'download_times' => $this->download_times,
             'price' => $this->price,
             'description' => $this->description,
-            'logo' => $this->log,
+            'logo' => $this->logo,
         ];
     }
 }

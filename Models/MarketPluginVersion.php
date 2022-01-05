@@ -26,8 +26,8 @@ class MarketPluginVersion extends Model
         return data_get($this->plugin_metadata, 'description', '');
     }
 
-    public function getLogAttribute(): string
+    public function getLogoAttribute(): string
     {
-        return data_get($this->plugin_metadata, 'log', '');
+        return data_get($this->plugin_metadata, 'logo', '');
     }
 }
