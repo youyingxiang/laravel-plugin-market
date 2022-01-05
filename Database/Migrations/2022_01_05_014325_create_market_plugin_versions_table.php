@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMarketPluginsTable extends Migration
+class CreateMarketPluginVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateMarketPluginsTable extends Migration
      */
     public function up()
     {
-        Schema::create('market_plugins', function (Blueprint $table) {
+        Schema::create('market_plugin_versions', function (Blueprint $table) {
             $table->id();
-            $table->string("plugin_name");
-            $table->unsignedInteger("author");
-            $table->unsignedTinyInteger("type")->default(0);
-            $table->unsignedTinyInteger("status")->default(0);
+            $table->unsignedInteger("plugin_id");
+            $table->string("version");
+            $table->string("download_link");
             $table->unsignedInteger("download_times")->default(0);
+            $table->unsignedInteger("price")->default(0);
+            $table->json("plugin_metadata");
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateMarketPluginsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('market_plugins');
+        Schema::dropIfExists('market_plugin_versions');
     }
 }

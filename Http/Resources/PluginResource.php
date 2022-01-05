@@ -2,7 +2,7 @@
 namespace Plugins\PluginMarket\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
+use Plugins\PluginMarket\Enums\PluginType;
 
 class PluginResource extends JsonResource
 {
@@ -10,7 +10,9 @@ class PluginResource extends JsonResource
     {
         return [
             'name' => $this->plugin_name,
-            'download_link' => Storage::url($this->download_link),
+            'author' => $this->author,
+            'type' => PluginType::type($this->type),
+            'versions' => PluginVersionResource::collection($this->versions),
         ];
     }
 }

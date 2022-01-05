@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class CreatePluginData extends DataTransferObject
 {
     public string $pluginName;
-    public int $marketUserId;
+    public int $author;
     public array $pluginMetadata;
     public string $content;
     public string $contentType;
@@ -28,7 +28,7 @@ class CreatePluginData extends DataTransferObject
 
         return new self([
             'pluginName' => data_get($pluginInfo,'name'),
-            'marketUserId' => 1,
+            'author' => 1,
             'content' => $request->getContent(),
             'pluginMetadata' => $pluginInfo,
             'contentType' => $request->header('content-type')

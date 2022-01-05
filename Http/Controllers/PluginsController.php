@@ -20,7 +20,7 @@ class PluginsController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return PluginResource::collection(MarketPlugin::query()->latest()->get());
+        return PluginResource::collection(MarketPlugin::query()->with('versions')->latest()->get());
     }
 
     /**
