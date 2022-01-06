@@ -1,5 +1,5 @@
 <?php
-namespace Plugins\PluginMarket\Requests\Plugins;
+namespace Plugins\PluginMarket\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

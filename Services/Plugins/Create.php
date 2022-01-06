@@ -35,7 +35,7 @@ class Create
                 'version' =>  data_get($createPluginData->pluginMetadata, 'version', '1.0.0'),
                 'plugin_id' => $mp->id
             ], [
-                'download_link' => $path,
+                'path' => $path,
                 'plugin_metadata' => $createPluginData->pluginMetadata,
             ]);
         });

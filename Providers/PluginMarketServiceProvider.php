@@ -3,6 +3,7 @@
 namespace Plugins\PluginMarket\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class PluginMarketServiceProvider extends ServiceProvider
@@ -53,6 +54,8 @@ class PluginMarketServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             plugin_path($this->pluginName, 'Config/config.php'), $this->pluginNameLower
         );
+
+        config(Arr::dot(config($this->pluginNameLower . '.auth', []), 'auth.'));
     }
 
     /**

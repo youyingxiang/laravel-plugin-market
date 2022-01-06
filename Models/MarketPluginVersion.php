@@ -10,15 +10,15 @@ class MarketPluginVersion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['version', 'plugin_id', 'download_link',  'plugin_metadata', 'price'];
+    protected $fillable = ['version', 'plugin_id', 'path',  'plugin_metadata', 'price'];
 
     protected $casts = [
         'plugin_metadata' => 'json'
     ];
 
-    public function getDownloadLinkAttribute($value): string
+    public function getDownloadLinkAttribute(): string
     {
-        return Storage::url($value);
+        return Storage::url($this->path);
     }
 
     public function getDescriptionAttribute(): string

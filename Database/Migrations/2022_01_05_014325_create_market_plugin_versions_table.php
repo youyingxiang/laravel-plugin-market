@@ -17,7 +17,7 @@ class CreateMarketPluginVersionsTable extends Migration
             $table->id();
             $table->unsignedInteger("plugin_id");
             $table->string("version");
-            $table->string("download_link");
+            $table->string("path");
             $table->unsignedInteger("download_times")->default(0);
             $table->unsignedInteger("price")->default(0);
             $table->json("plugin_metadata");

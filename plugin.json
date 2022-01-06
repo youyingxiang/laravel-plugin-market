@@ -1,7 +1,8 @@
 {
     "name": "PluginMarket",
     "alias": "pluginmarket",
-    "description": "",
+    "description": "市场插件",
+    "version": "1.0.0",
     "keywords": [],
     "priority": 1,
     "providers": [
@@ -12,7 +13,8 @@
     "requires": [],
     "composer": {
         "require": {
-            "spatie/data-transfer-object": "^2.8"
+            "spatie/data-transfer-object": "^2.8",
+            "laravel/sanctum": "^2.13"
         }
     }
 }

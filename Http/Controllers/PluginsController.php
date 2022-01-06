@@ -11,6 +11,8 @@ use Plugins\PluginMarket\Exceptions\ApiRequestException;
 use Plugins\PluginMarket\Models\MarketPlugin;
 use Plugins\PluginMarket\Http\Resources\PluginResource;
 use Plugins\PluginMarket\Services\plugins\Create;
+use Plugins\PluginMarket\Services\plugins\Install;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Throwable;
 
 class PluginsController extends Controller
@@ -37,5 +39,23 @@ class PluginsController extends Controller
         } catch (\Exception $exception) {
             throw new ApiRequestException($exception->getMessage());
         }
+    }
+
+    /**
+     * @param  int  $versionId
+     * @param  Install  $install
+     * @return StreamedResponse
+     */
+    public function install(int $versionId, Install $install): StreamedResponse
+    {
+        return $install->execute($versionId);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function count(): JsonResponse
+    {
+        return Response::json(['count' => MarketPlugin::query()->count()]);
     }
 }

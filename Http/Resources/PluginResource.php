@@ -2,6 +2,7 @@
 namespace Plugins\PluginMarket\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Plugins\PluginMarket\Enums\PluginStatus;
 use Plugins\PluginMarket\Enums\PluginType;
 
 class PluginResource extends JsonResource
@@ -13,6 +14,7 @@ class PluginResource extends JsonResource
             'author' => $this->author,
             'type' => PluginType::type($this->type),
             'versions' => PluginVersionResource::collection($this->versions),
+            'status' => PluginStatus::status($this->status),
         ];
     }
 }
