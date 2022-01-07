@@ -2,6 +2,7 @@
 namespace Plugins\PluginMarket\DTOs;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Plugins\PluginMarket\Exceptions\ApiRequestException;
 use Spatie\DataTransferObject\DataTransferObject;
@@ -28,7 +29,7 @@ class CreatePluginData extends DataTransferObject
 
         return new self([
             'pluginName' => data_get($pluginInfo,'name'),
-            'author' => 1,
+            'author' => Auth::user()->id,
             'content' => $request->getContent(),
             'pluginMetadata' => $pluginInfo,
             'contentType' => $request->header('content-type')

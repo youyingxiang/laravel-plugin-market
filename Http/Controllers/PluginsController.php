@@ -10,8 +10,8 @@ use Plugins\PluginMarket\DTOs\CreatePluginData;
 use Plugins\PluginMarket\Exceptions\ApiRequestException;
 use Plugins\PluginMarket\Models\MarketPlugin;
 use Plugins\PluginMarket\Http\Resources\PluginResource;
-use Plugins\PluginMarket\Services\plugins\Create;
-use Plugins\PluginMarket\Services\plugins\Install;
+use Plugins\PluginMarket\Services\Plugins\Create;
+use Plugins\PluginMarket\Services\Plugins\Install;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Throwable;
 
@@ -22,7 +22,7 @@ class PluginsController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return PluginResource::collection(MarketPlugin::query()->with('versions')->get());
+        return PluginResource::collection(MarketPlugin::query()->with(['versions', 'market_user'])->get());
     }
 
     /**

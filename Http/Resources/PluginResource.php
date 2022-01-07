@@ -11,7 +11,7 @@ class PluginResource extends JsonResource
     {
         return [
             'name' => $this->plugin_name,
-            'author' => $this->author,
+            'author' => optional($this->market_user)->name,
             'type' => PluginType::type($this->type),
             'versions' => PluginVersionResource::collection($this->versions),
             'status' => PluginStatus::status($this->status),

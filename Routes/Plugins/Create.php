@@ -1,5 +1,5 @@
 <?php
-namespace Plugins\PluginMarket\Services\plugins;
+namespace Plugins\PluginMarket\Services\Plugins;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;

@@ -18,13 +18,13 @@ use Plugins\PluginMarket\Http\Controllers\UserController;
 
 Route::prefix("pluginmarket")->group(function (){
     Route::middleware("auth:sanctum")->group(function (){
-        Route::get("post", [PluginsController::class,"store"]);
+        Route::post("plugins", [PluginsController::class,"store"]);
         Route::get("user-info", [UserController::class, "getUserInfo"]);
         Route::get("user/plugins", [UserController::class,"getPlugins"]);
         Route::post("plugins/install/{versionId}", [PluginsController::class,"install"]);
     });
-    Route::get("plugins", [PluginsController::class,"index"]);
     Route::get("plugins/count", [PluginsController::class,"count"]);
+    Route::get("plugins", [PluginsController::class,"index"]);
     Route::post("register",[RegisterController::class, 'register']);
     Route::post("login",[LoginController::class, 'login']);
 });
