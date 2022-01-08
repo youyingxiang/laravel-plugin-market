@@ -16,6 +16,8 @@ class CreateMarketPluginVersionsTable extends Migration
         Schema::create('market_plugin_versions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger("plugin_id");
+            $table->unsignedTinyInteger("type")->default(0);
+            $table->unsignedTinyInteger("status")->default(0);
             $table->string("version");
             $table->string("path");
             $table->unsignedInteger("download_times")->default(0);

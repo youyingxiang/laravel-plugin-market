@@ -12,6 +12,8 @@ class PluginVersionResource extends JsonResource
             'version' => $this->version,
             'download_link' => $this->download_link,
             'download_times' => $this->download_times,
+            'type' => $this->type_str,
+            'status' => $this->status_str,
             'price' => $this->price,
             'description' => $this->description,
             'logo' => $this->logo,

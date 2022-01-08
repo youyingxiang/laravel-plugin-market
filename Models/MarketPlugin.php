@@ -11,7 +11,7 @@ class MarketPlugin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["plugin_name", "author", "type"];
+    protected $fillable = ["plugin_name", "author_id"];
 
     /**
      * @return HasMany
@@ -24,9 +24,9 @@ class MarketPlugin extends Model
     /**
      * @return BelongsTo
      */
-    public function market_user():BelongsTo
+    public function author():BelongsTo
     {
-        return $this->belongsTo(MarketUser::class, 'author');
+        return $this->belongsTo(MarketUser::class, 'author_id');
     }
 
 }

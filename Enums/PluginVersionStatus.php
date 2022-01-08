@@ -1,7 +1,7 @@
 <?php
 namespace Plugins\PluginMarket\Enums;
 
-class PluginStatus
+class PluginVersionStatus
 {
     const PENDING = 0;
     const WAIT_PENDING = 1;

@@ -16,9 +16,7 @@ class CreateMarketPluginsTable extends Migration
         Schema::create('market_plugins', function (Blueprint $table) {
             $table->id();
             $table->string("plugin_name");
-            $table->unsignedInteger("author");
-            $table->unsignedTinyInteger("type")->default(0);
-            $table->unsignedTinyInteger("status")->default(0);
+            $table->unsignedInteger("author_id");
             $table->unsignedInteger("download_times")->default(0);
             $table->timestamps();
         });

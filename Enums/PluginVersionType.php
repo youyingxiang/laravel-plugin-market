@@ -1,7 +1,7 @@
 <?php
 namespace Plugins\PluginMarket\Enums;
 
-class PluginType
+class PluginVersionType
 {
     const FREE = 0;
     const CHARGE = 1;

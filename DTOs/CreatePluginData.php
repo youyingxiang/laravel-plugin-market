@@ -10,7 +10,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class CreatePluginData extends DataTransferObject
 {
     public string $pluginName;
-    public int $author;
+    public int $authorId;
     public array $pluginMetadata;
     public string $content;
     public string $contentType;
@@ -29,7 +29,7 @@ class CreatePluginData extends DataTransferObject
 
         return new self([
             'pluginName' => data_get($pluginInfo,'name'),
-            'author' => Auth::user()->id,
+            'authorId' => Auth::user()->id,
             'content' => $request->getContent(),
             'pluginMetadata' => $pluginInfo,
             'contentType' => $request->header('content-type')

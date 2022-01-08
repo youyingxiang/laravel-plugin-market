@@ -7,9 +7,11 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use Plugins\PluginMarket\DTOs\CreatePluginData;
+use Plugins\PluginMarket\Enums\PluginVersionStatus;
 use Plugins\PluginMarket\Exceptions\ApiRequestException;
 use Plugins\PluginMarket\Models\MarketPlugin;
 use Plugins\PluginMarket\Http\Resources\PluginResource;
+use Plugins\PluginMarket\Models\MarketPluginVersion;
 use Plugins\PluginMarket\Services\Plugins\Create;
 use Plugins\PluginMarket\Services\Plugins\Install;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -22,7 +24,19 @@ class PluginsController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return PluginResource::collection(MarketPlugin::query()->with(['versions', 'market_user'])->get());
+        $mps = MarketPlugin::query()
+            ->with(['versions', 'author'])
+            ->get()
+            ->map(function (MarketPlugin $plugin){
+                $plugin->versions =  $plugin->versions->filter(function (MarketPluginVersion $version){
+                    return $version->status === PluginVersionStatus::ACTIVE;
+                });
+                return $plugin;
+            })
+            ->filter(function (MarketPlugin $plugin){
+                return $plugin->versions->isNotEmpty();
+            });
+        return PluginResource::collection($mps);
     }
 
     /**
