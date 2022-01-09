@@ -5,16 +5,16 @@ class PluginVersionStatus
 {
     const PENDING = 0;
     const WAIT_PENDING = 1;
-    const ACTIVE = 2;
-    const SUSPENDED = 3;
+    const SUSPENDED = 2;
+    const ACTIVE = 3;
 
     public static function all(): array
     {
         return [
             self::PENDING => '待审核',
             self::WAIT_PENDING => "审核中",
+            self::SUSPENDED => '停用',
             self::ACTIVE => '已审核',
-            self::SUSPENDED => '停用'
         ];
     }
 

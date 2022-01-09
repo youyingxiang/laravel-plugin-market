@@ -26,6 +26,10 @@ class MarketUser extends Model
         'email_verified_at' => 'datetime',
     ];
 
+    public function getAuthIdentifier() {
+        return $this->id;
+    }
+
     public function getAvatarAttribute(): string
     {
         return 'https://ui-avatars.com/api/?name='.$this->name.'color=7F9CF5&background=EBF4FF';

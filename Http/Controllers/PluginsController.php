@@ -1,6 +1,7 @@
 <?php
 namespace Plugins\PluginMarket\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -26,15 +27,13 @@ class PluginsController extends Controller
     {
         $mps = MarketPlugin::query()
             ->with(['versions', 'author'])
+            ->whereHas('versions', fn(Builder $builder) => $builder->release())
             ->get()
             ->map(function (MarketPlugin $plugin){
-                $plugin->versions =  $plugin->versions->filter(function (MarketPluginVersion $version){
-                    return $version->status === PluginVersionStatus::ACTIVE;
-                });
+                $plugin->versions =  $plugin->versions->filter(fn (MarketPluginVersion $version) =>
+                     $version->status === PluginVersionStatus::ACTIVE
+                );
                 return $plugin;
-            })
-            ->filter(function (MarketPlugin $plugin){
-                return $plugin->versions->isNotEmpty();
             });
         return PluginResource::collection($mps);
     }
@@ -70,6 +69,6 @@ class PluginsController extends Controller
      */
     public function count(): JsonResponse
     {
-        return Response::json(['count' => MarketPlugin::query()->count()]);
+        return Response::json(['count' => MarketPlugin::query()->whereHas('versions', fn(Builder $builder) => $builder->release())->count()]);
     }
 }
