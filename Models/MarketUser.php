@@ -2,12 +2,13 @@
 
 namespace Plugins\PluginMarket\Models;
 
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class MarketUser extends Model
+class MarketUser extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
@@ -25,10 +26,6 @@ class MarketUser extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function getAuthIdentifier() {
-        return $this->id;
-    }
 
     public function getAvatarAttribute(): string
     {

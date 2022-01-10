@@ -2,6 +2,7 @@
 namespace Plugins\PluginMarket\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Plugins\PluginMarket\ValueObjects\Money;
 
 class PluginVersionResource extends JsonResource
 {
@@ -12,9 +13,8 @@ class PluginVersionResource extends JsonResource
             'version' => $this->version,
             'download_link' => $this->download_link,
             'download_times' => $this->download_times,
-            'type' => $this->type_str,
             'status' => $this->status_str,
-            'price' => $this->price,
+            'price' => $this->price_amount,
             'description' => $this->description,
             'logo' => $this->logo,
         ];

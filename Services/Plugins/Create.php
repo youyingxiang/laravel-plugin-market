@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Plugins\PluginMarket\DTOs\CreatePluginData;
 use Plugins\PluginMarket\Models\MarketPlugin;
-use Symfony\Component\Mime\MimeTypes;
 use Throwable;
 
 class Create
@@ -17,9 +16,7 @@ class Create
      */
     public function execute(CreatePluginData $createPluginData): void
     {
-        $ext = data_get((new MimeTypes())->getExtensions($createPluginData->contentType), 0);
-
-        $path = Str::replaceArray("?" , [$createPluginData->authorId, Str::uuid(), $ext], "?/?.?");
+        $path = Str::replaceArray("?" , [$createPluginData->authorId, Str::uuid()], "?/?.zip");
 
         Storage::put($path, $createPluginData->content);
 

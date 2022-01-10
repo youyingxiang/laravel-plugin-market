@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Plugins\PluginMarket\Enums\PluginVersionStatus;
 use Plugins\PluginMarket\Http\Resources\PluginResource;
 use Plugins\PluginMarket\Http\Resources\UserResource;

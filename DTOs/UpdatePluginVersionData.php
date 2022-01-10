@@ -4,13 +4,14 @@ namespace Plugins\PluginMarket\DTOs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Plugins\PluginMarket\Exceptions\ApiRequestException;
+use Plugins\PluginMarket\ValueObjects\Money;
 use Spatie\DataTransferObject\DataTransferObject;
 
 class UpdatePluginVersionData extends DataTransferObject
 {
     public bool $changeStatus;
     public ?string $version;
-    public ?float $price;
+    public Money $price;
     public ?string $description;
     public ?string $logo;
 
@@ -18,7 +19,7 @@ class UpdatePluginVersionData extends DataTransferObject
     {
         $validator = Validator::make($request->input(), [
             'change_status' => 'boolean|nullable',
-            'price' => 'numeric|nullable'
+            'price' => 'numeric'
         ]);
 
         if ($validator->fails()) {
@@ -28,7 +29,7 @@ class UpdatePluginVersionData extends DataTransferObject
         return new self([
             'changeStatus' => (bool)$request->input('change_status', false),
             'version' => $request->input('version'),
-            'price' => (float)$request->input('price'),
+            'price' => Money::withDefaultCurrency(bcmul($request->input('price', 0), 100)),
             'description' => $request->input('description'),
             'logo' => $request->input('logo'),
         ]);

@@ -4,6 +4,7 @@ namespace Plugins\PluginMarket\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class PluginMarketServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class PluginMarketServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->gate();
     }
 
     /**
@@ -111,5 +113,14 @@ class PluginMarketServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    protected function gate()
+    {
+        Gate::define('viewPluginMarket', function ($user) {
+            return in_array($user->email, [
+                "1365831278@qq.com"
+            ]);
+        });
     }
 }

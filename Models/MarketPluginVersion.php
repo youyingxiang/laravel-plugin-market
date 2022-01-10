@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 use Plugins\PluginMarket\Enums\PluginVersionStatus;
-use Plugins\PluginMarket\Enums\PluginVersionType;
+use Plugins\PluginMarket\ValueObjects\Money;
 
 /**
  * Class MarketPluginVersion
@@ -24,11 +24,17 @@ class MarketPluginVersion extends Model
         'plugin_metadata' => 'json'
     ];
 
+    /**
+     * @return string
+     */
     public function getDownloadLinkAttribute(): string
     {
         return Storage::url($this->path);
     }
 
+    /**
+     * @param $value
+     */
     public function setLogoAttribute($value): void
     {
         if ($value) {
@@ -38,6 +44,9 @@ class MarketPluginVersion extends Model
         }
     }
 
+    /**
+     * @param $value
+     */
     public function setDescriptionAttribute($value): void
     {
         if ($value) {
@@ -47,14 +56,17 @@ class MarketPluginVersion extends Model
         }
     }
 
+    /**
+     * @return float
+     */
+    public function getPriceAmountAttribute(): float
+    {
+        return Money::withDefaultCurrency($this->price)->amount();
+    }
+
     public function plugin():BelongsTo
     {
         return $this->belongsTo(MarketPlugin::class, 'plugin_id');
-    }
-
-    public function getTypeStrAttribute(): string
-    {
-        return PluginVersionType::type($this->type);
     }
 
     public function getStatusStrAttribute(): string

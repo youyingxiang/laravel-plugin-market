@@ -15,13 +15,21 @@ class Update
             ->whereHas('plugin', fn(Builder $builder) => $builder->where('author_id', $userId))
             ->findOrFail($versionId);
 
-        $data->logo !== null && $mpv->logo = $data->logo;
-        $data->version !== null && $mpv->version = $data->version;
-        $data->price !== null && $mpv->price = $data->price;
-        $data->description !== null && $mpv->description = $data->description;
         if ($data->changeStatus) {
+            if (MarketPluginVersion::query()
+                ->where('plugin_id', $mpv->plugin_id)
+                ->where('version', $data->version)
+                ->release()
+                ->exists()) {
+                throw new \Exception("当前版本已发布，请更换一个版本号！");
+            }
             $mpv->status = PluginVersionStatus::WAIT_PENDING;
         }
+
+        $data->logo !== null && $mpv->logo = $data->logo;
+        $data->version !== null && $mpv->version = $data->version;
+        $mpv->price = $data->price->amountInCent;
+        $data->description !== null && $mpv->description = $data->description;
 
         $mpv->saveOrFail();
     }
