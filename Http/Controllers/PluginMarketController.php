@@ -3,7 +3,6 @@
 namespace Plugins\PluginMarket\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class PluginMarketController extends Controller
@@ -14,6 +13,6 @@ class PluginMarketController extends Controller
      */
     public function index()
     {
-        return view('pluginmarket::index');
+        return view('pluginmarket::layout');
     }
 }

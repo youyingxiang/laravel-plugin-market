@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('pluginmarket')->group(function() {
-    Route::get('/', 'PluginMarketController@index');
+    Route::get('/{view?}', 'PluginMarketController@index')->where('view', '(.*)')->name('pluginmarket');
 });
