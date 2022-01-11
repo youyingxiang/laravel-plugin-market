@@ -2,7 +2,6 @@
 namespace Plugins\PluginMarket\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Plugins\PluginMarket\ValueObjects\Money;
 
 class PluginVersionResource extends JsonResource
 {

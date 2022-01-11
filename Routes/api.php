@@ -26,6 +26,7 @@ Route::prefix("pluginmarket")->group(function (){
         Route::resource('pluginversions',  'PluginsVersionsController');
         Route::post('upload/image',  [UploadController::class, 'image']);
     });
+    Route::resource('users', 'UserController');
     Route::get("plugins/count", [PluginsController::class,"count"]);
     Route::get("plugins", [PluginsController::class,"index"]);
     Route::post("register",[RegisterController::class, 'register']);

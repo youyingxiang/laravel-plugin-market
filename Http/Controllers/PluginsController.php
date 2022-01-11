@@ -22,20 +22,28 @@ use Throwable;
 class PluginsController extends Controller
 {
     /**
+     * @param  Request  $request
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
+        $status = $request->input('status');
         $mps = MarketPlugin::query()
             ->with(['versions', 'author'])
-            ->whereHas('versions', fn(Builder $builder) => $builder->release())
-            ->get()
-            ->map(function (MarketPlugin $plugin){
-                $plugin->versions =  $plugin->versions->filter(fn (MarketPluginVersion $version) =>
-                     $version->status === PluginVersionStatus::ACTIVE
+            ->when($status, fn(Builder $builder) =>
+               $builder->whereHas('versions', fn(Builder $builder) => call_user_func([$builder, $status]))
+            )
+            ->latest()
+            ->paginate(1);
+        if ($status) {
+            $mps->through(function(MarketPlugin $plugin) use ($status) {
+                $plugin->versions = $plugin->versions->filter(fn(MarketPluginVersion $version) =>
+                $status === "release" ? $version->status === PluginVersionStatus::ACTIVE : $version->status !== PluginVersionStatus::ACTIVE
                 );
                 return $plugin;
             });
+        }
+
         return PluginResource::collection($mps);
     }
 

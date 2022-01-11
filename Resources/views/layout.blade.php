@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
+<html lang="{{\Illuminate\Support\Facades\App::getLocale()}}" class="h-full bg-gray-100">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Plugin PluginMarket</title>
+        <title>插件市场</title>
 
        {{-- Laravel Mix - CSS File --}}
        <link rel="stylesheet" href="{{ mix('css/app.css', "plugins/pluginmarket/build") }}">
 
     </head>
     <body class="h-full">
-        <div id="pluginmarket">
+        <div id="pluginmarket" class="mx-auto">
             <router-view></router-view>
         </div>
         {{-- Laravel Mix - JS File --}}

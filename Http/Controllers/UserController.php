@@ -11,9 +11,18 @@ use Plugins\PluginMarket\Http\Resources\PluginResource;
 use Plugins\PluginMarket\Http\Resources\UserResource;
 use Plugins\PluginMarket\Models\MarketPlugin;
 use Plugins\PluginMarket\Models\MarketPluginVersion;
+use Plugins\PluginMarket\Models\MarketUser;
 
 class UserController extends Controller
 {
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function index():AnonymousResourceCollection
+    {
+        return UserResource::collection(MarketUser::query()->latest()->paginate());
+    }
     /**
      * @return UserResource
      */
