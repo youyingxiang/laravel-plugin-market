@@ -1,0 +1,41 @@
+{
+    "name": "yxx/laravel-plugin-market",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "youyingxiang",
+            "email": "1365831278@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Yxx\\LaravelPluginMarket\\": "src/"
+        },
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yxx\\LaravelPluginMarket\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.4.0",
+        "laravel/framework": "~6.0|~7.0|~8.0",
+        "ext-zip": "*",
+        "spatie/data-transfer-object": "^2.8",
+        "laravel/sanctum": "^2.13"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^4.0|^5.0|^6.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yxx\\LaravelPluginMarket\\Providers\\PluginMarketServiceProvider"
+            ]
+        }
+    }
+}
