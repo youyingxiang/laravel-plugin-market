@@ -48,8 +48,10 @@ export default {
     this.reload()
   },
   watch: {
-    $route() {
-      this.reload()
+    $route(form, to) {
+      if (form.name === to.name) {
+        this.reload()
+      }
     },
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-md p-4 my-2" :class="bgColor50" v-show="show">
+  <div class="rounded-md p-4" :class="bgColor50" v-show="show">
     <div class="flex">
       <div class="flex-shrink-0">
         <CheckCircleIcon  v-if="type === 'success'" class="h-5 w-5 text-green-400" aria-hidden="true" />

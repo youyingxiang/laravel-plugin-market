@@ -14,7 +14,7 @@ class PluginVersionStatus
             self::PENDING => '待审核',
             self::WAIT_PENDING => "审核中",
             self::SUSPENDED => '停用',
-            self::ACTIVE => '已审核',
+            self::ACTIVE => '已发布',
         ];
     }
 

@@ -7,7 +7,7 @@
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-white overflow-y-auto">
         <div class="flex-shrink-0 px-4 flex items-center">
-            <h1 class="text-2xl font-semibold text-gray-900">Laravel plugin</h1>
+            <h1 class="text-2xl font-semibold text-gray-900 tracking-wider">Laravel - Plugin</h1>
         </div>
         <div class="flex-grow mt-5 flex flex-col">
           <nav class="flex-1 px-2 pb-4 space-y-1">
@@ -16,6 +16,17 @@
               {{ item.name }}
             </router-link>
           </nav>
+        </div>
+        <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+          <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
+            <div class="flex items-center">
+              <div class="">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                  退出登录
+                </p>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -59,17 +70,20 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  CalendarIcon
 } from '@heroicons/vue/outline'
 import { SearchIcon } from '@heroicons/vue/solid'
 
 const navigation = [
   { name: '注册用户', to: {'name': 'admin-users'}, icon: UsersIcon},
   { name: '上传插件', to: {'name': 'admin-plugins'}, icon: FolderIcon},
+  { name: '下载记录', to: {'name': 'admin-download-histories'}, icon: CalendarIcon},
 ]
 
 export default {
   components: {
     Alert,
+    CalendarIcon,
     Dialog,
     DialogOverlay,
     Menu,
@@ -86,6 +100,9 @@ export default {
 
   computed: {
     routeName() {
+       if (this.$route.name === "admin-plugin-versions-show") {
+         return "admin-plugins"
+       }
        return this.$route.name;
     },
 
@@ -93,6 +110,12 @@ export default {
       return _.filter(navigation, (nav) =>{
           return nav.to.name === this.routeName
       })[0].name
+    }
+  },
+  methods: {
+    logout() {
+      this.$root.token = "";
+      this.$router.push({name : "login"})
     }
   },
 

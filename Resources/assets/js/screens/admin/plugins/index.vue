@@ -68,8 +68,12 @@
                   {{plugin.download_times}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a v-if="plugin.is_installed" href="javascript:void(0)" class="text-gray-600 hover:text-gray-900 disabled">已安装</a>
-                  <actions v-if="!plugin.is_installed" :versionId="plugin.version_id"></actions>
+                  <span class="sr-only"></span>
+                  <router-link :to="{name:'admin-plugin-versions-show', params: {id: plugin.version_id}}">
+                    <svg class="h-5 w-5 text-gray-400 hover:text-gray-700" x-description="Heroicon name: solid/chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                  </router-link>
                 </td>
               </tr>
               </tbody>

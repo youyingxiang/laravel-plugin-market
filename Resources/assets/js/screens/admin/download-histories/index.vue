@@ -10,38 +10,39 @@
               <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  名称
+                  插件名称
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  邮箱
+                  插件版本
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  图像
+                  插件价格
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  注册时间
+                  用户名称
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  下载时间
                 </th>
               </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                <tr v-for="(user, index) in users">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {{user.name}}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{user.email}}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10">
-                        <img class="h-10 w-10 rounded-full" :src="user.avatar" alt="user.name">
-                      </div>
-                    </div>
-                  </td>
-
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{user.created_at}}
-                  </td>
+              <tr v-for="(download, index) in downloads">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {{download.plugin_name}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{download.plugin_version}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{download.price}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{download.user_name}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{download.time}}
+                </td>
               </tr>
 
               <!-- More people... -->
@@ -59,27 +60,26 @@
 <script>
 import axios from "axios";
 export default {
-   data() {
-     return {
-       meta:{},
-       users:[]
-     }
-   },
-   provide() {
+  data() {
     return {
-      reload: this.loadUsers
+      meta:{},
+      downloads:[]
+    }
+  },
+  provide() {
+    return {
+      reload: this.loadDownloads
     };
   },
 
-   methods: {
-     loadUsers() {
-        axios.get('/api/pluginmarket/users?page=' + this.$refs.pagination.page ?? 1).then(resp => {
-          this.users = resp?.data?.data;
-          this.meta = resp?.data?.meta;
-       })
-     }
-   }
-
+  methods: {
+    loadDownloads() {
+      axios.get('/api/pluginmarket/download-histories?page=' + this.$refs.pagination.page ?? 1).then(resp => {
+        this.downloads = resp?.data?.data;
+        this.meta = resp?.data?.meta;
+      })
+    }
+  }
 }
 </script>
 

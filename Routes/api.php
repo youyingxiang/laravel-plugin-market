@@ -19,14 +19,15 @@ use Plugins\PluginMarket\Http\Controllers\UploadController;
 
 Route::prefix("pluginmarket")->group(function (){
     Route::middleware("auth:sanctum")->group(function (){
+        Route::resource('pluginversions',  'PluginsVersionsController');
         Route::post("plugins", [PluginsController::class,"store"]);
         Route::get("user-info", [UserController::class, "getUserInfo"]);
         Route::get("user/plugins/{status}", [UserController::class,"getPlugins"]);
         Route::post("plugins/install/{versionId}", [PluginsController::class,"install"]);
-        Route::resource('pluginversions',  'PluginsVersionsController');
         Route::post('upload/image',  [UploadController::class, 'image']);
+        Route::resource('download-histories', 'PluginDownloadsController')->only('index');
+        Route::resource('users', 'UserController');
     });
-    Route::resource('users', 'UserController');
     Route::get("plugins/count", [PluginsController::class,"count"]);
     Route::get("plugins", [PluginsController::class,"index"]);
     Route::post("register",[RegisterController::class, 'register']);

@@ -34,7 +34,7 @@ class PluginsController extends Controller
                $builder->whereHas('versions', fn(Builder $builder) => call_user_func([$builder, $status]))
             )
             ->latest()
-            ->paginate(1);
+            ->paginate();
         if ($status) {
             $mps->through(function(MarketPlugin $plugin) use ($status) {
                 $plugin->versions = $plugin->versions->filter(fn(MarketPluginVersion $version) =>

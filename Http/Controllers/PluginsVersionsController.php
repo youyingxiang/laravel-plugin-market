@@ -5,6 +5,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 use Plugins\PluginMarket\DTOs\UpdatePluginVersionData;
 use Plugins\PluginMarket\Exceptions\ApiRequestException;
@@ -32,7 +33,8 @@ class PluginsVersionsController extends Controller
     public function update(int $versionId, Request $request, Update $update): JsonResponse
     {
         try {
-            $update->execute($versionId, Auth::id(), UpdatePluginVersionData::fromRequest($request));
+            $isAdmin = Gate::allows('viewPluginMarket');
+            $update->execute($versionId, Auth::id(), $isAdmin, UpdatePluginVersionData::fromRequest($request));
             return Response::json([]);
         } catch (\Exception $exception) {
             throw new ApiRequestException($exception->getMessage());

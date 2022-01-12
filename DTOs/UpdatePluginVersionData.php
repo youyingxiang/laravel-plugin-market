@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class UpdatePluginVersionData extends DataTransferObject
 {
-    public bool $changeStatus;
+    public int $status;
     public ?string $version;
     public Money $price;
     public ?string $description;
@@ -18,7 +18,7 @@ class UpdatePluginVersionData extends DataTransferObject
     public static function fromRequest(Request $request): self
     {
         $validator = Validator::make($request->input(), [
-            'change_status' => 'boolean|nullable',
+            'status' => 'integer',
             'price' => 'numeric'
         ]);
 
@@ -27,7 +27,7 @@ class UpdatePluginVersionData extends DataTransferObject
         }
 
         return new self([
-            'changeStatus' => (bool)$request->input('change_status', false),
+            'status' => (int)$request->input('status', 0),
             'version' => $request->input('version'),
             'price' => Money::withDefaultCurrency(bcmul($request->input('price', 0), 100)),
             'description' => $request->input('description'),
