@@ -22,7 +22,7 @@
         "laravel/framework": "~6.0|~7.0|~8.0",
         "ext-zip": "*",
         "spatie/data-transfer-object": "^2.8",
-        "laravel/sanctum": "^2.13"
+        "laravel/sanctum": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
