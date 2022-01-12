@@ -6,7 +6,9 @@
 
 * step 1
 
-``` composer require yxx/laravel-plugin-market```
+``` 
+composer require yxx/laravel-plugin-market
+```
 
 * step 2
 

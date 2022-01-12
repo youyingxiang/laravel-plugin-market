@@ -56,7 +56,7 @@
                   </select>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{plugin.status}}
+                  {{plugin.status_str}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{plugin.description}}
@@ -140,6 +140,7 @@ export default {
       plugin.description = defaultVersion.description
       plugin.logo = defaultVersion.logo
       plugin.version = defaultVersion.version
+      plugin.status_str = defaultVersion.status_str
       plugin.status = defaultVersion.status
       plugin.price = defaultVersion.price > 0 ? defaultVersion.price : "免费"
       plugin.version_id = defaultVersion.id
