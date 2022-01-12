@@ -35,7 +35,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        // 是否开启 ui
+        if (config('pluginmarket.ui.enable')) {
+            $this->mapWebRoutes();
+        }
     }
 
     /**

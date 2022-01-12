@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Yxx\LaravelPluginMarket\Enums\PluginVersionStatus;
 use Yxx\LaravelPluginMarket\Http\Resources\PluginResource;
 use Yxx\LaravelPluginMarket\Http\Resources\UserResource;
@@ -44,7 +43,7 @@ class UserController extends Controller
             ->get()
             ->map(function(MarketPlugin $plugin) use ($status) {
                 $plugin->versions = $plugin->versions->filter(fn(MarketPluginVersion $version) =>
-                    $status === "release" ? $version->status === PluginVersionStatus::ACTIVE : $version->status !== PluginVersionStatus::ACTIVE
+                $status === "release" ? $version->status === PluginVersionStatus::ACTIVE : $version->status !== PluginVersionStatus::ACTIVE
                 );
                 return $plugin;
             });

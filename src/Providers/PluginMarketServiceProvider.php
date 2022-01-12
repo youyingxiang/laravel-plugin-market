@@ -48,9 +48,16 @@ class PluginMarketServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../resources/lang' => resource_path('lang'),
             ], 'plugin-market-lang');
-            $this->publishes([
-                __DIR__.'/../../resources/build' => public_path('vendor/'. $this->pluginNameLower)
-            ], $this->pluginNameLower . '-build');
+
+            // 是否开启 ui
+            if (config('pluginmarket.ui.enable')) {
+                $this->publishes([
+                    __DIR__.'/../../resources/build' => public_path('vendor/'. $this->pluginNameLower)
+                ], $this->pluginNameLower . '-build');
+            }
+
+            $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+
         }
     }
     /**

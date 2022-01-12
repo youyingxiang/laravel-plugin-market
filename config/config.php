@@ -20,6 +20,8 @@ return [
     ],
     'allow_view_admin' => [
         '1365831278@qq.com'
-    ]
-
+    ],
+    'ui' => [
+        'enable' => true
+    ],
 ];

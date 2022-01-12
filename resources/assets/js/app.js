@@ -41,7 +41,7 @@ const app = createApp({
             return response
         }, async function (error) {
             that.alertError(error?.response?.data?.message)
-            if (error.response && error.response.status === 401) {
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                 that.token = ""
                 router.push({name : "login"})
             }
