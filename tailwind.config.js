@@ -1,9 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
-    "./Resources/**/*.blade.php",
-    "./Resources/**/*.vue",
-    "./Resources/**/*.js",
+    "./resources/**/*.blade.php",
+    "./resources/**/*.vue",
+    "./resources/**/*.js",
   ],
   theme: {
     extend: {

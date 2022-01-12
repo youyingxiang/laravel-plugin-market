@@ -41,7 +41,10 @@ const app = createApp({
             return response
         }, async function (error) {
             that.alertError(error?.response?.data?.message)
-            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+            if (error.response && error.response.status === 403) {
+                router.push({name : "home-index"})
+            }
+            if (error.response && (error.response.status === 401)) {
                 that.token = ""
                 router.push({name : "login"})
             }
@@ -53,7 +56,9 @@ const app = createApp({
             if (this.token) {
                 window.localStorage.setItem("token", this.token);
                 axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+                this.getUserInfo();
             } else {
+                this.userInfo = null;
                 window.localStorage.removeItem("token");
             }
         }
@@ -63,6 +68,7 @@ const app = createApp({
 
 app.component("admin-layout", require("./components/admin/Layout").default);
 app.component("admin-pagination", require("./components/admin/Pagination").default);
+app.component("layout", require("./components/home/Layout").default);
 
 router.beforeEach((to, from, next) => {
     if ((to.name === "login" || to.name === "register") && window.localStorage.getItem("token")) {

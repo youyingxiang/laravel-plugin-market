@@ -23,7 +23,7 @@ Route::prefix("pluginmarket")->group(function (){
         Route::resource('pluginversions',  'PluginsVersionsController');
         Route::post("plugins", [PluginsController::class,"store"]);
         Route::get("user-info", [UserController::class, "getUserInfo"]);
-        Route::get("user/plugins/{status}", [UserController::class,"getPlugins"]);
+        Route::get("user/plugins", [UserController::class,"getPlugins"]);
         Route::post("plugins/install/{versionId}", [PluginsController::class,"install"]);
         Route::post('upload/image',  [UploadController::class, 'image']);
         Route::resource('download-histories', 'PluginDownloadsController')->only('index');

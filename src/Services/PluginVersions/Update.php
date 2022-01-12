@@ -11,15 +11,17 @@ class Update
 {
     public function execute(int $versionId,int $userId, bool $isAdmin,UpdatePluginVersionData $data): void
     {
-        // 普通用户只能将插件状态改为待审核
-        if (!$isAdmin && $data->status !== PluginVersionStatus::WAIT_PENDING) {
-            throw new \Exception("无法修改当前插件状态！");
-        }
+
         $mpv = MarketPluginVersion::query()
             ->when(!$isAdmin, fn (Builder $builder) =>
                 $builder->notRelease()->whereHas('plugin', fn(Builder $builder) => $builder->where('author_id', $userId))
             )
             ->findOrFail($versionId);
+
+        // 普通用户只能将插件状态改为待审核
+        if (!$isAdmin && !in_array($data->status, [$data->status, PluginVersionStatus::WAIT_PENDING])) {
+            throw new \Exception("无法修改当前插件状态！");
+        }
 
         if (in_array($data->status, [PluginVersionStatus::ACTIVE, PluginVersionStatus::WAIT_PENDING])) {
             if (MarketPluginVersion::query()

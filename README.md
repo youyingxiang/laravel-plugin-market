@@ -11,7 +11,7 @@
 * step 2
 
 ```php
-php artisan vendor:publish
+php artisan vendor:publish --provider="Yxx\LaravelPluginMarket\Providers\PluginMarketServiceProvider"
 ```
 * step 3
 ```php

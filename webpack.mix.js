@@ -14,5 +14,6 @@ mix.vue({ version: 3 })
 if (mix.inProduction()) {
     mix.version()
 }
+mix.copyDirectory('resources/build', '../public/vendor/pluginmarket')
 
 

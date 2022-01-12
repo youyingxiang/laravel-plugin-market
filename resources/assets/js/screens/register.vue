@@ -1,5 +1,5 @@
 <template>
-  <alert :message="this.$root.alert.message" :type="this.$root.alert.type" :auto-close="this.$root.alert.autoClose" :time="this.$root.alert.time"></alert>
+  <layout>
   <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -59,15 +59,12 @@
       </div>
     </div>
   </div>
+  </layout>
 </template>
 
 <script>
-import Alert from "../components/Alert";
 import axios from "axios";
 export default {
-  components: {
-    Alert
-  },
   data() {
     return {
       isLoading: false,
@@ -112,7 +109,7 @@ export default {
         }
       }).then(response => {
         this.$root.token = response.data.token;
-        this.$router.push({name:"admin-index"});
+        this.$router.push({name:"home-index"});
       }).finally(()=>{
         this.isLoading = false
       })

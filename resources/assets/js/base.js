@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default {
     methods: {
         /**
@@ -15,6 +17,15 @@ export default {
             this.$root.alert.autoClose = autoClose;
             this.$root.alert.message = message;
             this.$root.alert.time = new Date().getTime()
+        },
+        getUserInfo() {
+            if (this.$root.isLogin) {
+                axios.get("/api/pluginmarket/user-info").then(response => {
+                    this.$root.userInfo = response.data;
+                }).catch(error=> {
+                    this.alertError(error?.response?.data?.message)
+                })
+            }
         },
     }
 }
