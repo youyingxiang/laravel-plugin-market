@@ -10,7 +10,7 @@
     "autoload": {
         "psr-4": {
             "Yxx\\LaravelPluginMarket\\": "src/"
-        },
+        }
     },
     "autoload-dev": {
         "psr-4": {
