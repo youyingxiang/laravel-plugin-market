@@ -80,10 +80,10 @@
             {{ item.name }}
           </DisclosureButton>
 
-          <DisclosureButton v-if="isLogin" :to="{name: 'register'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+          <DisclosureButton v-if="!isLogin" :to="{name: 'register'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
             注册
           </DisclosureButton>
-          <DisclosureButton v-if="isLogin" :to="{name: 'login'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+          <DisclosureButton v-if="!isLogin" :to="{name: 'login'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
             登录
           </DisclosureButton>
         </div>
