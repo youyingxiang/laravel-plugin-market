@@ -11,9 +11,9 @@ mix.vue({ version: 3 })
         processCssUrls: false,
         postCss: [ tailwindcss('./tailwind.config.js') ],
     })
-if (mix.inProduction()) {
-    mix.version()
-}
+// if (mix.inProduction()) {
+//     mix.version()
+// }
 mix.copyDirectory('resources/build', '../public/vendor/pluginmarket')
 
 

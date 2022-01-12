@@ -1,9 +1,3 @@
-/*!
-  * vue-router v4.0.12
-  * (c) 2021 Eduardo San Martin Morote
-  * @license MIT
-  */
-
 /**
  * @license
  * Lodash <https://lodash.com/>
