@@ -2,13 +2,13 @@
 
 namespace Yxx\LaravelPluginMarket\Http\Middleware;
 
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
-class Authorize
+class AdminAuthorize
 {
     public function handle($request, $next)
     {
-        if (Gate::denies('viewPluginMarket')) {
+        if (Auth::user()->not_admin) {
             abort(403);
         }
         return $next($request);

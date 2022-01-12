@@ -6,7 +6,7 @@ use Yxx\LaravelPluginMarket\Http\Controllers\RegisterController;
 use Yxx\LaravelPluginMarket\Http\Controllers\LoginController;
 use Yxx\LaravelPluginMarket\Http\Controllers\UserController;
 use Yxx\LaravelPluginMarket\Http\Controllers\UploadController;
-use Yxx\LaravelPluginMarket\Http\Middleware\Authorize;
+use Yxx\LaravelPluginMarket\Http\Middleware\AdminAuthorize;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,7 +28,7 @@ Route::prefix("pluginmarket")->group(function (){
         Route::post('upload/image',  [UploadController::class, 'image']);
         Route::resource('download-histories', 'PluginDownloadsController')->only('index');
 
-        Route::middleware(Authorize::class)->group(function (){
+        Route::middleware(AdminAuthorize::class)->group(function (){
             Route::resource('users', 'UserController');
             Route::resource('download-histories', 'PluginDownloadsController')->only('index');
         });

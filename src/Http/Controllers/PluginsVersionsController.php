@@ -5,7 +5,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 use Yxx\LaravelPluginMarket\DTOs\UpdatePluginVersionData;
 use Yxx\LaravelPluginMarket\Exceptions\ApiRequestException;
@@ -33,7 +32,7 @@ class PluginsVersionsController extends Controller
     public function update(int $versionId, Request $request, Update $update): JsonResponse
     {
         try {
-            $isAdmin = Gate::allows('viewPluginMarket');
+            $isAdmin = Auth::user()->is_admin;
             $update->execute($versionId, Auth::id(), $isAdmin, UpdatePluginVersionData::fromRequest($request));
             return Response::json([]);
         } catch (\Exception $exception) {

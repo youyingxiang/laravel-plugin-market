@@ -93,7 +93,7 @@ class PluginMarketServiceProvider extends ServiceProvider
 
     protected function gate(): void
     {
-        Gate::define('viewPluginMarket', function ($user) {
+        Gate::define('admin', function ($user) {
             return in_array($user->email, config("$this->pluginNameLower.allow_view_admin"));
         });
     }
