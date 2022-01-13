@@ -59,6 +59,7 @@ const app = createApp({
                 this.getUserInfo();
             } else {
                 this.userInfo = null;
+                axios.defaults.headers.common['Authorization'] = "";
                 window.localStorage.removeItem("token");
             }
         }

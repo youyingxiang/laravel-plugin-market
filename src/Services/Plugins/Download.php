@@ -6,7 +6,7 @@ use Yxx\LaravelPluginMarket\Models\MarketPluginDownload;
 use Yxx\LaravelPluginMarket\Models\MarketPluginVersion;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class Install
+class Download
 {
     /**
      * @param  int  $versionId

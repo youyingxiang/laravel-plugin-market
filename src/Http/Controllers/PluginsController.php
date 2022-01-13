@@ -15,7 +15,7 @@ use Yxx\LaravelPluginMarket\Models\MarketPlugin;
 use Yxx\LaravelPluginMarket\Http\Resources\PluginResource;
 use Yxx\LaravelPluginMarket\Models\MarketPluginVersion;
 use Yxx\LaravelPluginMarket\Services\Plugins\Create;
-use Yxx\LaravelPluginMarket\Services\Plugins\Install;
+use Yxx\LaravelPluginMarket\Services\Plugins\Download;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Throwable;
 
@@ -65,10 +65,10 @@ class PluginsController extends Controller
 
     /**
      * @param  int  $versionId
-     * @param  Install  $install
+     * @param  Download  $install
      * @return StreamedResponse
      */
-    public function install(int $versionId, Install $install): StreamedResponse
+    public function download(int $versionId, Download $install): StreamedResponse
     {
         return $install->execute($versionId, Auth::id());
     }

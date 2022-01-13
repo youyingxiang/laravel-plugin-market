@@ -24,9 +24,8 @@ Route::prefix("pluginmarket")->group(function (){
         Route::post("plugins", [PluginsController::class,"store"]);
         Route::get("user-info", [UserController::class, "getUserInfo"]);
         Route::get("user/plugins", [UserController::class,"getPlugins"]);
-        Route::post("plugins/install/{versionId}", [PluginsController::class,"install"]);
+        Route::post("plugins/download/{versionId}", [PluginsController::class,"download"])->middleware('throttle:10,1');
         Route::post('upload/image',  [UploadController::class, 'image']);
-        Route::resource('download-histories', 'PluginDownloadsController')->only('index');
 
         Route::middleware(AdminAuthorize::class)->group(function (){
             Route::resource('users', 'UserController');
