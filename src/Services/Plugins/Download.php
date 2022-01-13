@@ -15,7 +15,7 @@ class Download
      */
     public function execute(int $versionId, int $userId): StreamedResponse
     {
-        $mpv = MarketPluginVersion::query()->with('plugin')->findOrFail($versionId);
+        $mpv = MarketPluginVersion::query()->with('plugin')->release()->findOrFail($versionId);
         MarketPluginDownload::query()->create([
             'plugin_version_id' => $mpv->id,
             'user_id' => $userId,
