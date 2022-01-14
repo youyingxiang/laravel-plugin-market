@@ -25,9 +25,13 @@ export default {
         return;
       }
       this.isLoading = true
-      axios.post("/api/pluginmarket/plugins/download/" + this.versionId).then(resp => {
+      axios({
+        method: 'post',
+        url:"/api/pluginmarket/plugins/download/" + this.versionId,
+        responseType: "arraybuffer"
+      }).then(resp => {
         const filename = resp.headers["content-disposition"];
-        const blob = new Blob([resp.data]);
+        const blob = new Blob([resp.data],{type:'application/zip'});
         let downloadElement = document.createElement("a"),
             href = window.URL.createObjectURL(blob);
         downloadElement.href = href;
