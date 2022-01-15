@@ -80,12 +80,12 @@
             {{ item.name }}
           </DisclosureButton>
 
-          <DisclosureButton v-if="!isLogin" :to="{name: 'register'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+          <router-link v-if="!isLogin" :to="{name: 'register'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
             注册
-          </DisclosureButton>
-          <DisclosureButton v-if="!isLogin" :to="{name: 'login'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+          </router-link>
+          <router-link v-if="!isLogin" :to="{name: 'login'}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
             登录
-          </DisclosureButton>
+          </router-link>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-200" v-if="isLogin">
           <div class="flex items-center px-4" >
@@ -137,12 +137,6 @@
       </main>
     </div>
   </div>
-  <!-- Simple footer -->
-  <footer class="max-w-7xl mx-auto py-16 px-4 overflow-hidden sm:px-6 lg:px-8">
-    <p class="mt-8 text-center text-base text-gray-500">
-      &copy; 备案号：湘ICP备2020019075号 © 2020 yxx All rights reserved. | my github
-    </p>
-  </footer>
 </template>
 
 <script>
@@ -151,7 +145,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import Alert from "../Alert";
 
 const navigation = [
-  { name: '文档', href: '#', current: false },
+  { name: '文档', href: 'http://docs.you-tang.com/', current: false },
   { name: 'Github', href: 'https://github.com/youyingxiang/laravel-plugin', current: false },
 ]
 
